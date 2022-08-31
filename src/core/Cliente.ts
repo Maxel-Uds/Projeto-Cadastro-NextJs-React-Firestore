@@ -3,7 +3,7 @@ export default class Cliente {
     #nome: string 
     #idade: number
 
-    constructor(nome: string = null, idade: number = 0, id: string = null) {
+    constructor(nome: string = null, idade: number = null, id: string = null) {
         this.#nome = nome;
         this.#idade = idade;
         this.#id = id;
@@ -14,4 +14,6 @@ export default class Cliente {
     get nome() { return this.#nome; }
 
     get idade() { return this.#idade; }
+
+    static vazio() { return new Cliente() }
 }

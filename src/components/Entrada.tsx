@@ -6,6 +6,7 @@ interface EntradaProps {
     alterarValor?: (valor: any) => void
     rangeMinimo?: number
     className?: string
+    legenda?: string
 }
 
 export default function Entrada(props: EntradaProps) {
@@ -18,7 +19,7 @@ export default function Entrada(props: EntradaProps) {
             <label className="mb-4">
                 {props.texto}
             </label>
-            <input type={props.tipo} value={props.valor} readOnly={props.apenasLeitura} className={`
+            <input type={props.tipo} value={props.valor} readOnly={props.apenasLeitura} placeholder={props.legenda} className={`
                 border border-purple-500 rounded-lg
                 focus:outline-none bg-gray-50
                 px-4 py-2

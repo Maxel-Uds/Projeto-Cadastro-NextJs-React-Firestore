@@ -6,26 +6,34 @@ import Layout from "../components/Layout"
 import Tabela from "../components/Tabela"
 import Cliente from "../core/Cliente"
 
-const clientes = [
-  new Cliente('Max', 22, '1'),
-  new Cliente('João', 32, '2')
-]
-
-function clienteSelecionado(cliente: Cliente) {
-  console.log(cliente)
-}
-
-function clienteExcluido(cliente: Cliente) {
-  console.log(cliente)
-}
-
-function salvarCliente(cliente: Cliente) {
-  console.log(cliente)
-}
-
 export default function Home() {
-
+  
+  const [cliente, setCliente] = useState<Cliente>(Cliente.vazio());
   const [visivel, setVisivel] = useState<'tabela' | 'form'>('tabela');
+
+  const clientes = [
+    new Cliente('Max', 22, '1'),
+    new Cliente('João', 32, '2')
+  ]
+  
+  function clienteSelecionado(cliente: Cliente) {
+    setCliente(cliente)
+    setVisivel('form')
+  }
+  
+  function clienteExcluido(cliente: Cliente) {
+    console.log(cliente)
+  }
+  
+  function salvarCliente(cliente: Cliente) {
+    console.log(cliente)
+    setVisivel('tabela')
+  }
+
+  function novoCliente() {
+    setCliente(Cliente.vazio()) 
+    setVisivel('form')
+  }
 
   return (
     <div className={`
@@ -40,14 +48,14 @@ export default function Home() {
           (
             <React.Fragment>
               <div className="flex justify-end">
-                <Botao className="mb-4" cor="green" onClick={() => setVisivel('form')}>Novo Cliente</Botao>
+                <Botao className="mb-4" cor="green" onClick={novoCliente}>Novo Cliente</Botao>
               </div>
               <Tabela clientes={clientes} clienteSelecionado={clienteSelecionado} clienteExcluido={clienteExcluido}></Tabela>
             </React.Fragment>
           )
           : 
           (
-            <Formulario cliente={clientes[0]} cancelar={() => setVisivel('tabela')} salvar={salvarCliente}/>
+            <Formulario cliente={cliente} cancelar={() => setVisivel('tabela')} salvar={salvarCliente}/>
           )
         }      
       </Layout>
