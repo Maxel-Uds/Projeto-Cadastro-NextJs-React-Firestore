@@ -1,5 +1,5 @@
 import Cliente from "../../core/Cliente";
-import firebase from "firebase";
+import firebase from "../Config";
 import ClienteRepositorio from "../../core/ClienteRepositorio";
 
 export default class ColecaoCliente implements ClienteRepositorio {
@@ -12,7 +12,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
         },
         fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): Cliente {
             const dados = snapshot?.data(options)
-            return new Cliente(dados?.nome, dados?.idade, dados?.id)
+            return new Cliente(dados?.nome, dados?.idade, snapshot.id)
         }
     }
 
@@ -31,7 +31,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
         return await this.tabelaClientes().doc(cliente.id).delete()
     }
 
-    async listar(cliente: Cliente): Promise<Cliente[]> {
+    async listar(): Promise<Cliente[]> {
         return (await this.tabelaClientes().get()).docs.map(doc => doc.data()) ?? [];
     }
 
