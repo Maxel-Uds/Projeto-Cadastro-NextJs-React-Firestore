@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Access the project [here](https://crud-cadastro.herokuapp.com/) or run the development server on your local machine:
 
 ```bash
 npm run dev
